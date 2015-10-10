@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apollo</title>
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body ontouchstart>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1">
+    <defs>
+        <symbol id="icon-arrow-down" viewBox="0 0 1024 1024">
+            <title>arrow-down</title>
+            <path class="path1" d="M772.688 372.688l-260.688 260.688-260.688-260.688-22.624 24.976 272 274.336h22.624l272-274.336z"></path>
+        </symbol>
+        <symbol id="icon-arrow-right" viewBox="0 0 1024 1024">
+            <title>arrow-right</title>
+            <path class="path1" d="M720 500.688l-274.336-272-23.808 22.624 260.112 260.688-260.976 260.688 24.816 22.624 274.192-272z"></path>
+        </symbol>
+        <symbol id="icon-arrow-up" viewBox="0 0 1024 1024">
+            <title>arrow-up</title>
+            <path class="path1" d="M795.312 626.336l-272-274.336h-22.624l-272 274.336 22.624 23.808 260.688-260.112 260.688 259.808z"></path>
+        </symbol>
+        <symbol id="icon-arrow-left" viewBox="0 0 1024 1024">
+            <title>arrow-left</title>
+            <path class="path1" d="M578.336 228.688l-274.336 272v22.624l274.336 272 23.808-22.624-260.112-260.688 259.808-260.688z"></path>
+        </symbol>
+        <symbol id="icon-motor" viewBox="0 0 1024 1024">
+            <title>motor</title>
+            <path class="path1" d="M512.016-1.808c-137.264 0-266.304 53.44-363.344 150.496-97.056 97.056-150.48 226.080-150.464 363.328 0 137.248 53.44 265.36 150.464 362.416 97.040 97.040 226.064 149.568 363.312 149.568 0.016 0 0.032 0 0.032 0h0.048c283.296 0 513.76-229.616 513.744-512.912 0.016-137.248-53.44-265.824-150.48-362.88-97.024-97.024-226.064-150.016-363.312-150.016zM512 993.808v16-17.808c-0.016 0-0.016 0-0.032 0-128.688 0-249.68-49.216-340.672-140.192-90.976-91.008-141.088-211.536-141.088-340.24-0.016-128.704 50.080-249.472 141.088-340.48s212-140.992 340.72-140.992c128.704 0 249.68 50.176 340.688 141.168 91.008 91.008 141.072 212.016 141.072 340.72 0.016 265.632-209.776 481.808-481.776 481.824z"></path>
+            <path class="path2" d="M512 144c-98.304 0-190.704 38.288-260.208 107.808-69.504 69.504-107.792 161.904-107.792 260.192h32c0-89.728 34.96-174.112 98.416-237.584 63.456-63.456 147.84-98.416 237.584-98.416s174.128 34.96 237.6 98.432c63.44 63.472 98.4 147.84 98.4 237.568h32c0-98.272-38.288-190.688-107.776-260.208s-161.92-107.792-260.224-107.792z"></path>
+            <path class="path3" d="M492.112 516.688l-96-111.152-24.224 20.928 97.152 112.512c-3.2 6.544-5.072 13.712-5.040 21.232 0.064 12.816 5.088 24.848 14.208 33.872 9.040 8.976 21.056 13.92 33.792 13.92 12.912 0 24.992-5.040 34.096-14.208 18.608-18.8 18.48-49.248-0.304-67.872-14.064-13.936-36.080-16.912-53.68-9.232zM523.36 571.264c-6.016 6.048-16.56 6.096-22.624 0.096-3.024-3.008-4.72-7.024-4.736-11.296s1.632-8.288 4.656-11.328c3.008-3.072 7.040-4.736 11.344-4.736 4.256 0 8.256 1.648 11.264 4.656 6.272 6.192 6.304 16.336 0.096 22.608z"></path>
+        </symbol>
+        <symbol id="icon-lightning" viewBox="0 0 1024 1024">
+            <title>lightning</title>
+            <path class="path1" d="M626.512 7.392l-368 576 13.488 24.608h203.12l-106.576 395.84 28.416 13.536 416-576-12.96-25.376h-205.344l61.168-397.568-29.312-11.040zM560.192 429.568l15.808 18.432h192.704l-346.56 479.856 89.312-331.696-15.456-20.16h-194.784l311.44-487.488-52.464 341.056z"></path>
+        </symbol>
+        <symbol id="icon-keyboard" viewBox="0 0 1024 1024">
+            <title>keyboard</title>
+            <path class="path1" d="M128 240h224v-144h-160v-32h-32v64h160v80h-224v128h-96v512h1024v-512h-896v-96zM992 816h-960v-448h960v448z"></path>
+            <path class="path2" d="M64 448h64v32h-64v-32z"></path>
+            <path class="path3" d="M160 448h64v32h-64v-32z"></path>
+            <path class="path4" d="M256 448h64v32h-64v-32z"></path>
+            <path class="path5" d="M352 448h64v32h-64v-32z"></path>
+            <path class="path6" d="M448 448h64v32h-64v-32z"></path>
+            <path class="path7" d="M544 448h64v32h-64v-32z"></path>
+            <path class="path8" d="M640 448h64v32h-64v-32z"></path>
+            <path class="path9" d="M736 448h64v32h-64v-32z"></path>
+            <path class="path10" d="M832 448h64v32h-64v-32z"></path>
+            <path class="path11" d="M64 704h64v32h-64v-32z"></path>
+            <path class="path12" d="M160 704h64v32h-64v-32z"></path>
+            <path class="path13" d="M256 704h416v32h-416v-32z"></path>
+            <path class="path14" d="M800 704h64v32h-64v-32z"></path>
+            <path class="path15" d="M896 704h64v32h-64v-32z"></path>
+            <path class="path16" d="M704 704h64v32h-64v-32z"></path>
+            <path class="path17" d="M128 576h64v32h-64v-32z"></path>
+            <path class="path18" d="M224 576h64v32h-64v-32z"></path>
+            <path class="path19" d="M320 576h64v32h-64v-32z"></path>
+            <path class="path20" d="M416 576h64v32h-64v-32z"></path>
+            <path class="path21" d="M512 576h64v32h-64v-32z"></path>
+            <path class="path22" d="M608 576h64v32h-64v-32z"></path>
+            <path class="path23" d="M704 576h64v32h-64v-32z"></path>
+            <path class="path24" d="M800 576h64v32h-64v-32z"></path>
+            <path class="path25" d="M896 576h64v32h-64v-32z"></path>
+        </symbol>
+        <symbol id="icon-message" viewBox="0 0 1024 1024">
+            <title>message</title>
+            <path class="path1" d="M0 768h272v210.784l245.92-210.784h506.080v-704h-1024v704zM32 96h960v640h-485.92l-202.080 173.216v-173.216h-272v-640z"></path>
+        </symbol>
+        <symbol id="icon-camera" viewBox="0 0 1024 1024">
+            <title>camera</title>
+            <path class="path1" d="M752 304h-105.376l-128-128h-422.624v32h409.376l96 96h-601.376v544h752v-148.032l272 160v-567.936l-272 160v-148.032zM992 347.968v456.064l-272-160v171.968h-688v-480h688v171.968l272-160z"></path>
+            <path class="path2" d="M96 432h64v32h-64v-32z"></path>
+            <path class="path3" d="M224 432h64v32h-64v-32z"></path>
+            <path class="path4" d="M96 752h320v-192h-320v192zM128 592h256v128h-256v-128z"></path>
+        </symbol>
+    </defs>
+</svg>
+
+    <div id="app" class="clearfix">
+        <div class="camera-x"><div v-el="cameraX" class="indicator"></div></div>
+        <div class="camera-y"><div v-el="cameraY" class="indicator"></div></div>
+        <div v-el="camera" class="camera">
+            <img v-el="stream" class="stream" src="http://apollo.lyt.io:9000/?action=stream" alt="">
+            <div class="dpad camera-controls" v-show="!touchControls">
+                <button class="btn dpad-up" v-el="cameraUp">W</button>
+                <button class="btn dpad-left" v-el="cameraLeft">A</button>
+                <button class="btn dpad-down" v-el="cameraDown">S</button>
+                <button class="btn dpad-right" v-el="cameraRight">D</button>
+            </div>
+            <div class="dpad camera-controls" v-show="touchControls">
+                <button class="btn dpad-up" v-el="cameraUp"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
+                <button class="btn dpad-left" v-el="cameraLeft"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
+                <button class="btn dpad-down" v-el="cameraDown"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
+                <button class="btn dpad-right" v-el="cameraRight"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
+            </div>
+            <div class="dpad drive-controls" v-show="!touchControls">
+                <button class="btn dpad-up"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
+                <button class="btn dpad-left"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
+                <button class="btn dpad-down"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
+                <button class="btn dpad-right"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
+            </div>
+            <div class="dpad drive-controls" v-show="touchControls">
+                <button class="btn dpad-up" v-on="touchstart: motorForward, touchend: motorStop" ><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
+                <button class="btn dpad-left" v-on="touchstart: motorLeft, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
+                <button class="btn dpad-down" v-on="touchstart: motorReverse, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
+                <button class="btn dpad-right" v-on="touchstart: motorRight, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
+            </div>
+        </div>
+        <div class="controlling {{ controlling ? '' : 'fade' }}">
+            <span class="username">{{ controlling.username }}</span>
+            <svg class="icon"><use v-attr="'xlink:href': '#icon-' + controlling.part"></use></svg>
+            <svg class="icon"><use v-attr="'xlink:href': '#icon-' + controlling.action"></use></svg>
+        </div>
+        <div v-el="chat" class="chat">
+            <button class="btn chat-toggle {{ this.chat ? 'active' : '' }}" v-on="click: toggleChat">
+                <svg class="icon"><use xlink:href="#icon-message"></use></svg>
+                <span class="unread-count">{{ unreadCount ? unreadCount : '' }}</span>
+            </button>
+            <div class="chat-controls" v-show="chat">
+                <div class="log">
+                    <ul v-el="messages" class="messages">
+                        <li class="message" v-repeat="messages">
+                            <strong class="username">{{ username }}</strong> {{ message }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="field"><input autocomplete="off" class="input" v-model="message" v-el="input" v-on="keydown: sendMessage | key 13" placeholder="Chat here"></div>
+            </div>
+        </div>
+        <div class="login" v-show="!login">
+            <div>
+                <h3>What's your nickname?</h3>
+                <input autofocus autocomplete="off" v-model="username" v-on="keydown: loginNow | key 13">
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

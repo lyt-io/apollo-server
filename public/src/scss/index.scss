@@ -1,0 +1,379 @@
+$breakpoint-sm: '(min-width: 40em)' !default;
+$breakpoint-md: '(min-width: 52em)' !default;
+$breakpoint-lg: '(min-width: 64em)' !default;
+
+$black: #111;
+$dark-gray: #26292E;
+$gray: #2F3238;
+$white: #FFFFFF;
+$yellow: #fee34c;
+$trans-black: rgba(0,0,0,.7);
+$trans-gray: rgba(0,0,0,.2);
+$border-radius: 3px;
+$font-weight: 300;
+
+html {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 1em;
+    font-weight: $font-weight;
+    line-height: 1.4;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+body {
+    margin: 0;
+    background: $black;
+}
+
+html,
+body {
+    height: 100%;
+    position: relative;
+}
+
+input {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: $font-weight;
+    line-height: 1.4;
+}
+
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}
+
+#app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.camera {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.stream {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.btn {
+    border-radius: $border-radius;
+    display: inline-block;
+    color: $white;
+    background: $trans-gray;
+    border: none;
+    padding: .25rem;
+    margin: 0;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    font-size: 2rem;
+    width: 1.25em;
+    height: 1.25em;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+.btn:active {
+    color: $black;
+    background: $yellow;
+    border-color: $black;
+}
+.dpad {
+    position: absolute;
+    bottom: 2%;
+    width: 8rem;
+    height: 5.25rem;
+}
+.dpad .btn {
+    position: absolute;
+}
+.dpad-up {
+    top: 0;
+}
+.dpad-down,
+.dpad-left,
+.dpad-right {
+    bottom: 0;
+}
+.dpad-up,
+.dpad-down {
+    left: 50%;
+    margin-left: -1.25rem;
+}
+.dpad-left {
+    left: 0;
+}
+.dpad-right {
+    right: 0;
+}
+.drive-controls {
+    right: 2%;
+}
+.camera-controls {
+    left: 2%;
+}
+.camera-x:before,
+.camera-y:before {
+    content: '';
+    position: absolute;
+    right: 50%;
+    width: 2px;
+    height: 6px;
+    background: $yellow;
+    margin-right: -1px;
+}
+.camera-y:before {
+    left: auto;
+    top: 50%;
+    right: 0;
+    width: 6px;
+    height: 2px;
+    margin-top: -1px;
+}
+.camera-x {
+    z-index: 1;
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    height: .5rem;
+    right: 25%;
+    top: .25rem;
+    border-top: 1px solid $yellow; 
+}
+.camera-y {
+    z-index: 1;
+    position: absolute;
+    top: 25%;
+    height: 50%;
+    width: .5rem;
+    bottom: 25%;
+    right: .25rem;
+    border-right: 1px solid $yellow; 
+}
+
+.indicator {
+    width: 0;
+    height: 0;
+    position: absolute;
+    box-sizing: border-box;
+}
+.camera-x .indicator {
+    right: 0;
+    top: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid $yellow;
+    margin-right: -4px;
+}
+.camera-y .indicator {
+    right: 0;
+    top: 0;
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid $yellow;
+    margin-top: -4px;
+}
+
+.controlling {
+    color: $white;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    background: $trans-black;
+    border-radius: $border-radius;
+    padding: 0 .25rem;
+    opacity: 1;
+    transition: opacity 300ms ease;
+}
+.controlling .username {
+    display: inline-block;
+    margin-right: .5em;
+}
+.controlling .icon {
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+.controlling.fade {
+    opacity: 0;
+}
+
+.unread-count {
+    position: absolute;
+    font-size: .75rem;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: .7rem
+}
+.chat {
+    position: absolute;
+    right: 2%;
+    left: auto;
+    top: 2%;
+    bottom: 6.25rem;
+    width: 70%;
+    height: auto !important;
+}
+.chat-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+    width: 1.5em;
+}
+.chat-toggle.active {
+    background: $trans-black;
+    color: $yellow;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.chat-controls {
+    padding-top: 2.5rem;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+.log {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 3.25rem;
+}
+.messages {
+    border-bottom-right-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+    border-top-left-radius: $border-radius;
+    background: $trans-black;
+    font-size: .8rem;
+    overflow: auto;
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+.message {
+    color: $white;
+    display: block;
+    padding: .5rem 1rem;
+    border-bottom: 1px solid $black;
+}
+.username {
+    display: inline-block;
+    margin-right: .25rem;
+    color: $yellow;
+    font-weight: $font-weight;
+}
+.field {
+    background: $trans-black;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    border-top: 1px solid $black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: .5rem 1rem;
+}
+.input {
+    font-weight: $font-weight;
+    font-size: 1em;
+    border-radius: 0;
+    color: $white;
+    background: $dark-gray;
+    padding: .5rem;
+    margin: 0;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    border-top: 2px solid $black;
+    outline: none;
+}
+
+.login {
+    z-index: 9999;
+    display: table;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: $trans-black;
+}
+.login div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+.login h3 {
+    font-weight: $font-weight;
+    display: block;
+    margin: 2rem 0;
+    font-size: 2rem;
+    color: $white;
+    line-height: 1.1;
+}
+.login input {
+    font-weight: $font-weight;
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    font-size: 2rem;
+    text-align: center;
+    background: transparent;
+    border: 0;
+    color: $white;
+    border-bottom: 2px solid $white;
+    outline: 0;
+    max-width: 400px;
+    padding: 0 0 .5rem 0;
+}
+
+::-webkit-input-placeholder {
+    color: $white;
+}
+:-moz-placeholder {
+   color: $white;
+   opacity: 1;
+}
+::-moz-placeholder {
+   color: $white;
+   opacity:  1;
+}
+:-ms-input-placeholder {
+   color: $white;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table
+}
+.clearfix:after { clear: both }
