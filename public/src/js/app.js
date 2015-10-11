@@ -1,4 +1,4 @@
-var socket = require('socket.io-client')('http://pi.lyt.io:8080')
+var socket = require('socket.io-client')('http://robot.lyt.io:8080')
 var Vue = require('vue')
 
 var app = new Vue({
