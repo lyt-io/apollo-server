@@ -91,10 +91,10 @@
                 <button class="btn dpad-right" v-el="cameraRight">D</button>
             </div>
             <div class="dpad camera-controls" v-show="touchControls">
-                <button class="btn dpad-up" v-el="cameraUp"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
-                <button class="btn dpad-left" v-el="cameraLeft"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
-                <button class="btn dpad-down" v-el="cameraDown"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
-                <button class="btn dpad-right" v-el="cameraRight"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
+                <button class="btn dpad-up" v-el="cameraUp" v-on="click: cameraUp"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
+                <button class="btn dpad-left" v-el="cameraLeft" v-on="click: cameraLeft"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
+                <button class="btn dpad-down" v-el="cameraDown" v-on="click: cameraDown"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
+                <button class="btn dpad-right" v-el="cameraRight" v-on="click: cameraRight"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
             </div>
             <div class="dpad drive-controls" v-show="!touchControls">
                 <button class="btn dpad-up"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
