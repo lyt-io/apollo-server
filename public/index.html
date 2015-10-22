@@ -82,32 +82,29 @@
     <div id="app" class="clearfix">
         <div class="camera-x"><div v-el="cameraX" class="indicator"></div></div>
         <div class="camera-y"><div v-el="cameraY" class="indicator"></div></div>
-        <div v-el="camera" class="camera">
-            <img v-el="stream" class="stream" src="http://robot.lyt.io:9000/?action=stream" alt="">
-            <div class="dpad camera-controls" v-show="!touchControls">
-                <button class="btn dpad-up" v-el="cameraUp">W</button>
-                <button class="btn dpad-left" v-el="cameraLeft">A</button>
-                <button class="btn dpad-down" v-el="cameraDown">S</button>
-                <button class="btn dpad-right" v-el="cameraRight">D</button>
-            </div>
-            <div class="dpad camera-controls" v-show="touchControls">
-                <button class="btn dpad-up" v-el="cameraUp" v-on="click: cameraUp"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
-                <button class="btn dpad-left" v-el="cameraLeft" v-on="click: cameraLeft"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
-                <button class="btn dpad-down" v-el="cameraDown" v-on="click: cameraDown"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
-                <button class="btn dpad-right" v-el="cameraRight" v-on="click: cameraRight"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
+        <div id="camera" v-el="camera" class="camera">
+            <div class="dpad camera-controls">
+                <svg class="icon label"><use xlink:href="#icon-camera"></use></svg>
+                <button class="btn dpad-up" v-el="cameraUp" v-on="click: cameraUp"><span v-show="!touchControls">W</span><svg v-show="touchControls" class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
+                <button class="btn dpad-left" v-el="cameraLeft" v-on="click: cameraLeft"><span v-show="!touchControls">A</span><svg v-show="touchControls" class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
+                <button class="btn dpad-down" v-el="cameraDown" v-on="click: cameraDown"><span v-show="!touchControls">S</span><svg v-show="touchControls" class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
+                <button class="btn dpad-right" v-el="cameraRight" v-on="click: cameraRight"><span v-show="!touchControls">D</span><svg v-show="touchControls" class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
             </div>
             <div class="dpad drive-controls" v-show="!touchControls">
-                <button class="btn dpad-up"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
-                <button class="btn dpad-left"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
-                <button class="btn dpad-down"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
-                <button class="btn dpad-right"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
+                <svg class="icon label"><use xlink:href="#icon-motor"></use></svg>
+                <button class="btn dpad-up" v-el="motorForward" v-on="mousedown: motorForward, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
+                <button class="btn dpad-left" v-el="motorLeft" v-on="mousedown: motorLeft, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
+                <button class="btn dpad-down" v-el="motorReverse" v-on="mousedown: motorReverse, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
+                <button class="btn dpad-right" v-el="motorRight" v-on="mousedown: motorRight, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
             </div>
             <div class="dpad drive-controls" v-show="touchControls">
-                <button class="btn dpad-up" v-on="touchstart: motorForward, touchend: motorStop" ><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
-                <button class="btn dpad-left" v-on="touchstart: motorLeft, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
-                <button class="btn dpad-down" v-on="touchstart: motorReverse, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
-                <button class="btn dpad-right" v-on="touchstart: motorRight, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
+                <svg class="icon label"><use xlink:href="#icon-motor"></use></svg>
+                <button class="btn dpad-up" v-el="motorForward" v-on="touchstart: motorForward, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
+                <button class="btn dpad-left" v-el="motorLeft" v-on="touchstart: motorLeft, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
+                <button class="btn dpad-down" v-el="motorReverse" v-on="touchstart: motorReverse, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
+                <button class="btn dpad-right" v-el="motorRight" v-on="touchstart: motorRight, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
             </div>
+            <div class="proximity1">{{ proximity1 ? proximity1 + 'in' : '' }}</div>
         </div>
         <div class="controlling {{ controlling ? '' : 'fade' }}">
             <span class="username">{{ controlling.username }}</span>

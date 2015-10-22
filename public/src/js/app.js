@@ -1,6 +1,32 @@
 var socket = require('socket.io-client')('http://robot.lyt.io:8080')
 var Vue = require('vue')
 
+var getStream = function(url) {
+    return new Promise(function(resolve, reject) {
+        var img = new Image()
+        img.onload = function() { resolve(img) }
+        img.onerror = function() { reject(img) }
+        img.src = url //+ '?random-no-cache=' + Math.floor((1 + Math.random()) * 0x10000).toString(16)
+        img.id = 'stream'
+
+        // Set a timeout for max-pings, 5s.
+        setTimeout(function() { reject(img) }, 3000)
+    });
+};
+
+getStream('http://robot.lyt.io:9000/?action=stream')
+    .then(function(img) { 
+        document.getElementById('camera').appendChild(img)
+    }, function(img) {
+        var camera = document.getElementById('camera')
+        var msg = document.createElement('div')
+        img.src = 'img/test-pattern.gif'
+        msg.id = 'message'
+        msg.innerHTML = 'The robot is sleeping.'
+        camera.insertBefore( img, camera.firstChild )
+        camera.insertBefore( msg, camera.firstChild )
+    });
+
 var app = new Vue({
     data: function () {
         return {
@@ -12,6 +38,7 @@ var app = new Vue({
             message: '',
             unreadCount: 0, 
             controlling: { username: '', part: '', action: '' },
+            proximity1: null
         }
     },
     created: function() {
@@ -53,9 +80,6 @@ var app = new Vue({
             })
         }.bind(this))
 
-        socket.on('camera ready', function (port) {
-            this.$$.stream.src = '//apollo.lyt.io:9000/?action=stream'
-        }.bind(this))
 
         socket.on('camera moved', function (data) {
             this.$$.cameraX.style.right = ( data.x / 180 * 100) + '%'
@@ -87,6 +111,10 @@ var app = new Vue({
                 that.controlling = null
             }, 1000)
         }.bind(this))
+
+        socket.on('proximity1', function (data) {
+            this.proximity1 = data;
+        }.bind(this))
     },
     ready: function () {
         var that = this;
@@ -98,34 +126,42 @@ var app = new Vue({
                 switch (e.keyCode) {
                     case 38:
                         socket.emit('motor forward')
+                        that.$$.motorForward.classList.add('active')
                         allowKeyDown = false
                         break
                     case 40:
                         socket.emit('motor reverse')
+                        that.$$.motorReverse.classList.add('active')
                         allowKeyDown = false
                         break
                     case 37:
                         socket.emit('motor left')
+                        that.$$.motorLeft.classList.add('active')
                         allowKeyDown = false
                         break
                     case 39:
                         socket.emit('motor right')
+                        that.$$.motorRight.classList.add('active')
                         allowKeyDown = false
                         break
                     case 87:
                         socket.emit('camera up')
+                        that.$$.cameraUp.classList.add('active')
                         allowKeyDown = false
                         break
                     case 83:
                         socket.emit('camera down')
+                        that.$$.cameraDown.classList.add('active')
                         allowKeyDown = false
                         break
                     case 65:
                         socket.emit('camera left')
+                        that.$$.cameraLeft.classList.add('active')
                         allowKeyDown = false
                         break
                     case 68:
                         socket.emit('camera right')
+                        that.$$.cameraRight.classList.add('active')
                         allowKeyDown = false
                         break
                 }
@@ -140,12 +176,20 @@ var app = new Vue({
                     case 37:
                     case 39:
                         socket.emit('motor stop')
+                        that.$$.motorForward.classList.remove('active')
+                        that.$$.motorReverse.classList.remove('active')
+                        that.$$.motorLeft.classList.remove('active')
+                        that.$$.motorRight.classList.remove('active')
                         allowKeyDown = true
                         break
                     case 87:
                     case 83:
                     case 65:
                     case 68:
+                        that.$$.cameraUp.classList.remove('active')
+                        that.$$.cameraDown.classList.remove('active')
+                        that.$$.cameraLeft.classList.remove('active')
+                        that.$$.cameraRight.classList.remove('active')
                         allowKeyDown = true
                         break
                 }
