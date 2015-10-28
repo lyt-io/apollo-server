@@ -37,6 +37,12 @@
             <title>lightning</title>
             <path class="path1" d="M626.512 7.392l-368 576 13.488 24.608h203.12l-106.576 395.84 28.416 13.536 416-576-12.96-25.376h-205.344l61.168-397.568-29.312-11.040zM560.192 429.568l15.808 18.432h192.704l-346.56 479.856 89.312-331.696-15.456-20.16h-194.784l311.44-487.488-52.464 341.056z"></path>
         </symbol>
+        <symbol id="icon-exclamation" viewBox="0 0 1024 1024">
+            <title>exclamation</title>
+            <path class="path1" d="M512 0c-136.752 0-265.328 53.28-362.016 150-96.72 96.672-149.984 225.248-149.984 362s53.264 265.328 149.984 362.016c96.688 96.72 225.264 149.984 362.016 149.984s265.328-53.28 362.032-150c96.704-96.672 149.968-225.248 149.968-362s-53.264-265.328-149.984-362.016c-96.688-96.72-225.264-149.984-362.016-149.984zM851.408 851.392c-90.672 90.672-211.2 140.608-339.408 140.608s-248.736-49.936-339.392-140.624c-90.672-90.64-140.608-211.168-140.608-339.376s49.936-248.736 140.608-339.392c90.656-90.672 211.184-140.608 339.392-140.608s248.736 49.952 339.408 140.624c90.672 90.64 140.592 211.168 140.592 339.376s-49.92 248.736-140.592 339.392z"></path>
+            <path class="path2" d="M496 272h32v352h-32v-352z"></path>
+            <path class="path3" d="M496 688h32v64h-32v-64z"></path>
+        </symbol>
         <symbol id="icon-keyboard" viewBox="0 0 1024 1024">
             <title>keyboard</title>
             <path class="path1" d="M128 240h224v-144h-160v-32h-32v64h160v80h-224v128h-96v512h1024v-512h-896v-96zM992 816h-960v-448h960v448z"></path>
@@ -92,10 +98,10 @@
             </div>
             <div class="dpad drive-controls" v-show="!touchControls">
                 <svg class="icon label"><use xlink:href="#icon-motor"></use></svg>
-                <button class="btn dpad-up" v-el="motorForward" v-on="mousedown: motorForward, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
-                <button class="btn dpad-left" v-el="motorLeft" v-on="mousedown: motorLeft, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
-                <button class="btn dpad-down" v-el="motorReverse" v-on="mousedown: motorReverse, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
-                <button class="btn dpad-right" v-el="motorRight" v-on="mousedown: motorRight, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
+                <button class="btn dpad-up" v-el="motorForwardClick" v-on="mousedown: motorForward, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
+                <button class="btn dpad-left" v-el="motorLeftClick" v-on="mousedown: motorLeft, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
+                <button class="btn dpad-down" v-el="motorReverseClick" v-on="mousedown: motorReverse, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
+                <button class="btn dpad-right" v-el="motorRightClick" v-on="mousedown: motorRight, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
             </div>
             <div class="dpad drive-controls" v-show="touchControls">
                 <svg class="icon label"><use xlink:href="#icon-motor"></use></svg>
@@ -104,9 +110,9 @@
                 <button class="btn dpad-down" v-el="motorReverse" v-on="touchstart: motorReverse, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
                 <button class="btn dpad-right" v-el="motorRight" v-on="touchstart: motorRight, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
             </div>
-            <div class="proximity1">{{ proximity1 ? proximity1 + 'in' : '' }}</div>
+            <div v-show="proximity1 <= MIN_PROXIMITY" class="proximity1"><svg class="icon"><use xlink:href="#icon-exclamation"></use></svg><br>Collison Eminent<br>{{ proximity1 ? proximity1 + 'in' : '' }}</div>
         </div>
-        <div class="controlling {{ controlling ? '' : 'fade' }}">
+        <div class="controlling {{ !controlling ? 'fade' : '' }}">
             <span class="username">{{ controlling.username }}</span>
             <svg class="icon"><use v-attr="'xlink:href': '#icon-' + controlling.part"></use></svg>
             <svg class="icon"><use v-attr="'xlink:href': '#icon-' + controlling.action"></use></svg>

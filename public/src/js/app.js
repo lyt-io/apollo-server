@@ -1,32 +1,6 @@
 var socket = require('socket.io-client')('http://robot.lyt.io:8080')
 var Vue = require('vue')
 
-var getStream = function(url) {
-    return new Promise(function(resolve, reject) {
-        var img = new Image()
-        img.onload = function() { resolve(img) }
-        img.onerror = function() { reject(img) }
-        img.src = url //+ '?random-no-cache=' + Math.floor((1 + Math.random()) * 0x10000).toString(16)
-        img.id = 'stream'
-
-        // Set a timeout for max-pings, 5s.
-        setTimeout(function() { reject(img) }, 3000)
-    });
-};
-
-getStream('http://robot.lyt.io:9000/?action=stream')
-    .then(function(img) { 
-        document.getElementById('camera').appendChild(img)
-    }, function(img) {
-        var camera = document.getElementById('camera')
-        var msg = document.createElement('div')
-        img.src = 'img/test-pattern.gif'
-        msg.id = 'message'
-        msg.innerHTML = 'The robot is sleeping.'
-        camera.insertBefore( img, camera.firstChild )
-        camera.insertBefore( msg, camera.firstChild )
-    });
-
 var app = new Vue({
     data: function () {
         return {
@@ -38,7 +12,8 @@ var app = new Vue({
             message: '',
             unreadCount: 0, 
             controlling: { username: '', part: '', action: '' },
-            proximity1: null
+            MIN_PROXIMITY: 3,
+            proximity1: 9
         }
     },
     created: function() {
@@ -114,10 +89,38 @@ var app = new Vue({
 
         socket.on('proximity1', function (data) {
             this.proximity1 = data;
+            if (this.proximity1 <= this.MIN_PROXIMITY) { this.$$.motorForward.style.display = 'none' } else { this.$$.motorForward.style.display =  'block' }
         }.bind(this))
     },
     ready: function () {
         var that = this;
+
+        var getStream = function(url) {
+            return new Promise(function(resolve, reject) {
+                var img = new Image()
+                img.onload = function() { resolve(img) }
+                img.onerror = function() { reject(img) }
+                img.src = url //+ '?random-no-cache=' + Math.floor((1 + Math.random()) * 0x10000).toString(16)
+                img.id = 'stream'
+
+                // Set a timeout for max-pings, 5s.
+                setTimeout(function() { reject(img) }, 3000)
+            });
+        };
+
+        getStream('http://robot.lyt.io:9000/?action=stream')
+            .then(function(img) { 
+                document.getElementById('camera').appendChild(img)
+            }, function(img) {
+                var camera = document.getElementById('camera')
+                var msg = document.createElement('div')
+                img.src = 'img/test-pattern.gif'
+                msg.classList.add('warning')
+                msg.innerHTML = '<div>The robot is sleeping.</div>'
+                camera.insertBefore( img, camera.firstChild )
+                camera.insertBefore( msg, camera.firstChild )
+            });
+
         this.touchControls = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch
         var allowKeyDown = true;
         document.onkeydown = function (e) {
@@ -125,23 +128,25 @@ var app = new Vue({
             if (e.target.tagName.toUpperCase() == 'BODY' && allowKeyDown) {
                 switch (e.keyCode) {
                     case 38:
-                        socket.emit('motor forward')
-                        that.$$.motorForward.classList.add('active')
-                        allowKeyDown = false
+                        if (that.proximity1 <= that.MIN_PROXIMITY) {
+                            socket.emit('motor forward')
+                            that.$$.motorForwardClick.classList.add('active')
+                            allowKeyDown = false
+                        }
                         break
                     case 40:
                         socket.emit('motor reverse')
-                        that.$$.motorReverse.classList.add('active')
+                        that.$$.motorReverseClick.classList.add('active')
                         allowKeyDown = false
                         break
                     case 37:
                         socket.emit('motor left')
-                        that.$$.motorLeft.classList.add('active')
+                        that.$$.motorLeftClick.classList.add('active')
                         allowKeyDown = false
                         break
                     case 39:
                         socket.emit('motor right')
-                        that.$$.motorRight.classList.add('active')
+                        that.$$.motorRightClick.classList.add('active')
                         allowKeyDown = false
                         break
                     case 87:
@@ -176,10 +181,10 @@ var app = new Vue({
                     case 37:
                     case 39:
                         socket.emit('motor stop')
-                        that.$$.motorForward.classList.remove('active')
-                        that.$$.motorReverse.classList.remove('active')
-                        that.$$.motorLeft.classList.remove('active')
-                        that.$$.motorRight.classList.remove('active')
+                        that.$$.motorForwardClick.classList.remove('active')
+                        that.$$.motorReverseClick.classList.remove('active')
+                        that.$$.motorLeftClick.classList.remove('active')
+                        that.$$.motorRightClick.classList.remove('active')
                         allowKeyDown = true
                         break
                     case 87:
