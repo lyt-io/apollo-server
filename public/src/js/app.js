@@ -12,8 +12,8 @@ var app = new Vue({
             message: '',
             unreadCount: 0, 
             controlling: { username: '', part: '', action: '' },
-            MIN_PROXIMITY: 3,
-            proximity1: 9
+            MIN_PROXIMITY: 10,
+            proximity1: 11
         }
     },
     created: function() {
@@ -38,7 +38,6 @@ var app = new Vue({
             }
             this.messages.push({
                 username: 'Cat Robot',
-
                 message: data.username + ' joined the party. ' + message
             })
         }.bind(this))
@@ -89,7 +88,6 @@ var app = new Vue({
 
         socket.on('proximity1', function (data) {
             this.proximity1 = data;
-            if (this.proximity1 <= this.MIN_PROXIMITY) { this.$$.motorForward.style.display = 'none' } else { this.$$.motorForward.style.display =  'block' }
         }.bind(this))
     },
     ready: function () {
@@ -123,15 +121,23 @@ var app = new Vue({
 
         this.touchControls = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch
         var allowKeyDown = true;
+        var proximityCheck = null;
         document.onkeydown = function (e) {
             e = e || window.event
             if (e.target.tagName.toUpperCase() == 'BODY' && allowKeyDown) {
                 switch (e.keyCode) {
                     case 38:
-                        if (that.proximity1 <= that.MIN_PROXIMITY) {
+                        if (that.proximity1 > that.MIN_PROXIMITY) {
                             socket.emit('motor forward')
                             that.$$.motorForwardClick.classList.add('active')
                             allowKeyDown = false
+                            var callback = function() {
+                                if (that.proximity1 < that.MIN_PROXIMITY) {
+                                    socket.emit('motor stop')
+                                    clearInterval(proximityCheck);
+                                }
+                            }
+                            proximityCheck = setInterval(callback, 250)
                         }
                         break
                     case 40:
@@ -181,6 +187,7 @@ var app = new Vue({
                     case 37:
                     case 39:
                         socket.emit('motor stop')
+                        clearInterval(proximityCheck)
                         that.$$.motorForwardClick.classList.remove('active')
                         that.$$.motorReverseClick.classList.remove('active')
                         that.$$.motorLeftClick.classList.remove('active')
@@ -205,6 +212,7 @@ var app = new Vue({
         loginNow: function () {
             if (this.username !== '') {
                 this.login = true
+                this.username = this.username.slice(0, 20)
                 socket.emit('add user', this.username)
             }
         },

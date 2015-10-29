@@ -98,14 +98,14 @@
             </div>
             <div class="dpad drive-controls" v-show="!touchControls">
                 <svg class="icon label"><use xlink:href="#icon-motor"></use></svg>
-                <button class="btn dpad-up" v-el="motorForwardClick" v-on="mousedown: motorForward, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
+                <button class="btn dpad-up" v-show="proximity1 > MIN_PROXIMITY" v-el="motorForwardClick" v-on="mousedown: motorForward, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
                 <button class="btn dpad-left" v-el="motorLeftClick" v-on="mousedown: motorLeft, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
                 <button class="btn dpad-down" v-el="motorReverseClick" v-on="mousedown: motorReverse, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
                 <button class="btn dpad-right" v-el="motorRightClick" v-on="mousedown: motorRight, mouseup: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
             </div>
             <div class="dpad drive-controls" v-show="touchControls">
                 <svg class="icon label"><use xlink:href="#icon-motor"></use></svg>
-                <button class="btn dpad-up" v-el="motorForward" v-on="touchstart: motorForward, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
+                <button class="btn dpad-up" v-show="proximity1 > MIN_PROXIMITY" v-el="motorForward" v-on="touchstart: motorForward, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-up"></use></svg></button>
                 <button class="btn dpad-left" v-el="motorLeft" v-on="touchstart: motorLeft, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-left"></use></svg></button>
                 <button class="btn dpad-down" v-el="motorReverse" v-on="touchstart: motorReverse, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-down"></use></svg></button>
                 <button class="btn dpad-right" v-el="motorRight" v-on="touchstart: motorRight, touchend: motorStop"><svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></button>
